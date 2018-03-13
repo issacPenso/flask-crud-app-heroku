@@ -3,12 +3,14 @@ from string import Template
 
 app = Flask(__name__)
 
+API_KEY = 'AIzaSyDA1cRVAlTLIqZOtev71U8KmURiUG3SIDQ'
+
 HTML_TEMPLATE = Template("""
 <h1>Hello ${place_name}!</h1>
 
-<img src="https://maps.googleapis.com/maps/api/staticmap?size=700x300&markers=${place_name}" alt="map of ${place_name}">
+<img src="https://maps.googleapis.com/maps/api/staticmap?size=700x300&markers=${place_name}&key={api_key}" alt="map of ${place_name}">
 
-<img src="https://maps.googleapis.com/maps/api/streetview?size=700x300&location=${place_name}" alt="street view of ${place_name}">
+<img src="https://maps.googleapis.com/maps/api/streetview?size=700x300&location=${place_name}&key={api_key}" alt="street view of ${place_name}">
 """)
 
 @app.route('/')
@@ -17,7 +19,7 @@ def homepage():
 
 @app.route('/<some_place>')
 def some_place_page(some_place):
-    return(HTML_TEMPLATE.substitute(place_name=some_place))
+    return(HTML_TEMPLATE.substitute(place_name=some_place, api_ley=API_KEY))
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
