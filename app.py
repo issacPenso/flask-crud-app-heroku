@@ -13,13 +13,16 @@ HTML_TEMPLATE = Template("""
 <img src="https://maps.googleapis.com/maps/api/streetview?size=700x300&location=${place_name}&key={api_key}" alt="street view of ${place_name}">
 """)
 
+
 @app.route('/')
 def homepage():
     return """<h1>Hello world!</h1>"""
 
+
 @app.route('/<some_place>')
 def some_place_page(some_place):
-    return(HTML_TEMPLATE.substitute(place_name=some_place, api_ley=API_KEY))
+    return HTML_TEMPLATE.substitute(place_name=some_place, api_key=API_KEY)
+
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
